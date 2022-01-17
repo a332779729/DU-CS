@@ -1,0 +1,10 @@
+insert into sailors (sid, name, rating, age, yrssailed) values (11, 'Kiele Cannicott', 41, 67, 26);
+insert into sailors (sid, name, rating, age, yrssailed) values (12, 'Dinah Sheron', 100, 42, 4);
+insert into sailors (sid, name, rating, age, yrssailed) values (13, 'Tye Vannuccinii', 15, 21, 29);
+insert into sailors (sid, name, rating, age, yrssailed) values (14, 'Brandtr Duhig', 72, 65, 8);
+insert into sailors (sid, name, rating, age, yrssailed) values (15, 'Susanne Radcliffe', 58, 56, 21);
+insert into sailors (sid, name, rating, age, yrssailed) values (16, 'Wainwright Goullee', 50, 29, 45);
+insert into sailors (sid, name, rating, age, yrssailed) values (17, 'Alecia Sprosson', 70, 49, 22);
+insert into sailors (sid, name, rating, age, yrssailed) values (18, 'Miner Jauncey', 57, 44, 40);
+insert into sailors (sid, name, rating, age, yrssailed) values (19, 'Glenna Bes', 15, 43, 33);
+insert into sailors (sid, name, rating, age, yrssailed) values (20, 'Valerye Dorkens', 11, 54, 60);
