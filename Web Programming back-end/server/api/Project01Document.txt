@@ -1,0 +1,299 @@
+For User part, I used the GET, POST, PUT, DELET
+
+  GET /api/users/
+  router.get('/', controller.index);
+
+  Decription: find all users.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method, and it is not need any params.
+  The Payloads: none.
+  The returned: User list
+  The response: 200 : find all users list
+                500 : error
+
+  GET /api/users/:id
+  router.get('/:id', controller.show);
+
+  Decription: find one user.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method.
+  The Payloads: id (user's id)
+  The returned: one User information
+  The response: 200 : successful
+                500 : error
+
+
+
+  POST /api/users/
+  router.post('/', controller.create);
+
+  Decription: create one user.
+  The HTTP: methods is POST, and this is write only function, so I use the POST method.
+  The Payloads: fullName (firstName, lastName),
+                userName,
+                emailAddress
+  The returned: user information
+  The response: 201 : successful
+                400 : error
+
+
+
+  PUT /api/users/:id
+  router.put('/:id', controller.update);
+
+  Decription: update one user.
+  The HTTP: methods is PUT, and this is modify function, so I use the PUT method.
+  The Payloads: id
+                fullName (firstName, lastName),
+                userName,
+                emailAddress
+  The returned: user information
+  The response: 200 : successful
+                404 : not found
+                400 : error
+
+
+
+  DELETE /api/users/:id
+  router.delete('/:id', controller.destroy);
+
+  Decription: delete one user.
+  The HTTP: methods is DETELE, and this is delete function, so I use the DELETE method.
+  The Payloads: id
+  The returned: none
+  The response: 204 : successful
+                404 : not found
+                400 : error
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+For Review part, I used the GET, POST, PUT, DELET
+
+  GET /api/reviews/
+  router.get('/', controller.index);
+
+  Decription: find all reviews.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method, and it is not need any params.
+  The Payloads: none.
+  The returned: review list
+  The response: 200 : find all reviews list
+                500 : error
+
+  GET /api/reviews/:id
+  router.get('/:id', controller.show);
+
+  Decription: find one review.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method.
+  The Payloads: id (review's id)
+  The returned: one review information
+  The response: 200 : successful
+                500 : error
+
+
+
+  POST /api/reviews/
+  router.post('/', controller.create);
+
+  Decription: create one review.
+  The HTTP: methods is POST, and this is write only function, so I use the POST method.
+  The Payloads: reviewDescription,
+                reviewRating,
+                userId,
+                recipeId
+  The returned: review information
+  The response: 201 : successful
+                400 : error
+
+
+
+  PUT /api/reviews/:id
+  router.put('/:id', controller.update);
+
+  Decription: update one review.
+  The HTTP: methods is PUT, and this is modify function, so I use the PUT method.
+  The Payloads: id
+                reviewDescription,
+                reviewRating,
+  The returned: review information
+  The response: 200 : successful
+                404 : not found
+                400 : error
+
+
+
+  DELETE /api/reviews/:id
+  router.delete('/:id', controller.destroy);
+
+  Decription: delete one review.
+  The HTTP: methods is DETELE, and this is delete function, so I use the DELETE method.
+  The Payloads: id
+  The returned: none
+  The response: 204 : successful
+                404 : not found
+                400 : error
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+For recipe part, I used the GET, POST, PUT, DELET
+
+  GET /api/recipes/
+  router.get('/', controller.index);
+
+  Decription: find all recipes.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method, and it is not need any params.
+  The Payloads: none.
+  The returned: recipe list
+  The response: 200 : find all recipes list
+                500 : error
+
+  GET /api/recipes/:id
+  router.get('/:id', controller.show);
+
+  Decription: find one recipe.
+  The HTTP: methods is GET, and this is read only function, so I use the GET method.
+  The Payloads: id (recipe's id)
+  The returned: one recipe information
+  The response: 200 : successful
+                500 : error
+
+
+
+  POST /api/recipes/
+  router.post('/', controller.create);
+
+  Decription: create one recipe.
+  The HTTP: methods is POST, and this is write only function, so I use the POST method.
+  The Payloads: name,
+                description,
+                pictureURL,
+                prepTime,
+                cookingTime,
+                directions,
+                ingredients (nutrition, poison)
+  The returned: recipe information
+  The response: 201 : successful
+                400 : error
+
+
+
+  PUT /api/recipes/:id
+  router.put('/:id', controller.update);
+
+  Decription: update one recipe.
+  The HTTP: methods is PUT, and this is modify function, so I use the PUT method.
+  The Payloads: id
+                name,
+                description,
+                pictureURL,
+                prepTime,
+                cookingTime,
+                directions,
+                ingredients (nutrition, poison)
+  The returned: recipe information
+  The response: 200 : successful
+                404 : not found
+                400 : error
+
+
+
+  DELETE /api/recipes/:id
+  router.delete('/:id', controller.destroy);
+
+  Decription: delete one recipe.
+  The HTTP: methods is DETELE, and this is delete function, so I use the DELETE method.
+  The Payloads: id
+  The returned: none
+  The response: 204 : successful
+                404 : not found
+                400 : error
+
+
+Describe each of the schemas that you created for Mongoose, and why you chose the types and validation
+requirements you did for each of the schema's attributes:
+
+For User
+    // This schema represents the fullName of the user
+    let fullNameSchema = Schema({
+      // firstName is a simple String type that is required
+      firstName: {type: String, required: true},
+      // lastName is a simple String type that is required
+      lastName: {type: String, required: true}
+    });
+
+    // This is the main user schema
+    let userSchema = Schema({
+      /*
+       fullName is a subdocument of User, and will be stored
+       in the same document as the User itself.
+       Unlike a populated document, this doesn't require an
+       ObjectId reference and the schema for name can be
+       referenced directly
+      */
+      fullName: fullNameSchema,
+      // userName is a simple String type that is required
+      userName: {type: String, required: true, unique: true},
+      // emailAddress is a simple String type that is required
+      emailAddress: {type: String, required: true, unique: true},
+
+    });
+
+For Review
+    // This is the main review schema
+    let reviewSchema = Schema({
+      // reviewDescription is a simple String type that is required
+      reviewDescription: {type: String, required: true},
+      // reviewRating is a simple Number type that is required, and I design the review rating's range is 0-5 number.
+      reviewRating: {type: Number, min: 0, max:5, required: true},
+      // dateCreated is a simple Date type, this should be set by the server
+      dateCreated: {type: Date, default: Date.now},
+      /*
+       userCreatingReview is referenced as a 'foreign key' using the objectId
+       of an User stored in a separate collection.
+       The userCreatingReview will be populated by Mongoose using 'Population'
+       http://mongoosejs.com/docs/populate.html
+      */
+      userCreatingReview : {type: Schema.Types.ObjectId, ref: "User" },
+
+    });
+
+For Recipe
+    // This schema represents the ingredient of the recipe
+    let ingredientSchema = Schema({
+        // nutrition is a simple String type that is required
+        nutrition: { type: String, required: true },
+        // poison is a simple String type that is required
+        poison: { type: String, required: true },
+     })
+
+
+    // This is the main user schema
+    let recipeSchema = Schema({
+      // name is a simple String type that is required
+      name: {type: String, required: true},
+      // description is a simple String type that is required
+      description: {type: String, required: true},
+      // pictureURL is a simple String type that is required
+      pictureURL: {type: String, required: true},
+      // prepTime is a simple Number type that is required, and I design the min number is 0
+      prepTime: {type: Number, min: 0, required: true},
+      // cookingTime is a simple Number type that is required, and I design the min number is 0
+      cookingTime: {type: Number, min: 0, required: true},
+      // directions is a array and the every element is a simple String type that is required
+      directions: [{type: String, required: true}],
+      /*
+       ingredients is a subdocument of Recipe, and will be stored
+       in the same document as the Recipe itself.
+       Unlike a populated document, this doesn't require an
+       ObjectId reference and the schema for name can be
+       referenced directly
+      */
+      ingredients: [ingredientSchema],
+      /*
+       userReviews is referenced as a 'foreign key' using the objectId
+       of an Review stored in a separate collection.
+       The userReviews will be populated by Mongoose using 'Population'
+       http://mongoosejs.com/docs/populate.html
+      */
+      userReviews: [{type: Schema.Types.ObjectId, ref: "Review" }],
+
+    });
