@@ -1,0 +1,99 @@
+
+.body{
+  margin: auto;
+  width: 80%;
+}
+
+.dark{
+  color: white;
+  background-color: gray;
+}
+
+.myNav a {
+  color: green;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px 0px;
+  width: 32%;
+  float: none;
+  text-decoration:none;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.myNav a:hover{
+  color: white;
+  background-color: red;
+}
+
+.myNav a:active{
+  color:red;
+  background-color: blue;
+}
+.myPic{
+  background: center;
+  width: 100%;
+}
+
+.intrname{
+  font-size: 50px;
+  text-align: center;
+  font-family: "Duru Sans",Verdana, sans-serif;
+  font-style: italic;
+  font-weight: bold;
+
+  border: 30px solid;
+  border-image: url(border.png) 30 round;
+}
+
+.intrname:hover{
+  color: white;
+  background-color: gray;
+  font-size: 46px;
+  padding: 10px;
+}
+
+.join:visited{
+  color: grey;
+}
+.join:active{
+  color:red;
+  background-color: blue;
+}
+.join:hover{
+  color: maroon;
+  background-color: yellow;
+}
+
+.DesPic img{
+  width:33%;
+  height: 200px;
+  border-radius:15px;
+}
+
+.pic{
+  width: 33%;
+  height: 200px;
+  border-radius: 15px;
+}
+
+.button1{
+  width: 150px;
+  height: 30px;
+  font-size: 20px;
+  margin: 10px
+}
+.button2{
+  width: 150px;
+  height: 30px;
+  font-size: 20px;
+  margin: 10px
+}
+
+.button3{
+  float: right;
+  width: 150px;
+  height: 30px;
+  font-size: 20px;
+  margin: 10px
+}

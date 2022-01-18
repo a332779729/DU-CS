@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <link rel = "stylesheet" href="outside.css">
+    <script src="./outside.js"></script>
+   </head>
+  <body id="allbody">
+    <div class="body">
+      <div class="myNav">
+      <nav >
+        <a href="project2.html">Home</a>|
+        <a href="Trails2.html">Trails</a>|
+        <a href="Outside2.html">Outdoor</a>
+        <!--<a href="/jquery/">Map</a>-->
+      </nav>
+    </div>
+      <hr>
+      <br>
+
+      <img src="goldengatecyn.jpg" id="changepic" class="myPic" alt="Smiley face">
+      <button class="button1" onclick="changepic()">Next</button>
+      <button class="button2" onclick="changepic2()">Pre</button>
+      <button class="button3" onclick="dark()">Dark</button>
+      <button class="button3" onclick="light()">Light</button>
+      <div>
+        <h1 class="intrname"> Golden Gate Canyon State Park</h1>
+      </div>
+    <h3>Map</h3>
+    <!--from google map : https://www.google.com/maps/place/Golden+Gate+Canyon+State+Park/@39.8414296,-105.4219927,17z/data=!3m1!4b1!4m8!3m7!1s0x876bbfa961fc9d69:0x539a6b8673b1b84!5m2!4m1!1i2!8m2!3d39.8414296!4d-105.4197987-->
+
+    <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3063.4641804190483!2d-105.42199274912566!3d39.841429579335205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876bbfa961fc9d69%3A0x539a6b8673b1b84!2sGolden%20Gate%20Canyon%20State%20Park!5e0!3m2!1szh-CN!2sus!4v1573617595424!5m2!1szh-CN!2sus" class="googlemap" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+    </div>
+     <h3>Planing</h3>
+       <ul>
+        <li><strong>Backcountry camping:</strong>
+          <br>Golden Gate offers 4 backcountry shelters and 20 backcountry tent sites. All backcountry shelters and tent sites are available on a first-come, first-served basis year round.
+          Register and purchase permits at the Visitor's Center. All shelters now have bear boxes and tent sites share a double bear box located in between​ sites.  Please remove all food and trash from bear boxes when you leave.
+          FIRES ARE NOT ALLOWED IN THE BACKCOUNTRY!
+        </li>
+        <br>
+        <li><strong>Biking:</strong>
+          <br>Mountain bikers can utilize trails designated for multiple use (approximately 19 miles of Golden Gate Canyon's trails). All trails are open, however there is still a large amount of snow on the upper section of the Mountain Lion trail.
+          Also, due to flood damage, the Deer Creek section of the Mountain Lion Trail is extremely difficult for mountain biking. Unless you are experienced with rough terrain, our recommendation is to avoid that area until repairs are made.
+          Please use caution while in that area.
+        </li>
+        <br>
+        <li><strong>Fishing:</strong>
+          <br>Fishing is permitted in any stream or pond at Golden Gate Canyon State Park with the exception of the Visitor's Center Show Pond. The daily bag limit at Golden Gate Canyon is four fish. There is an ADA-accessible fishing pier at Kriley Pond.
+          The Park’s ponds include Kriley, Slough, Dude's Fishing Hole, Forgotten Valley and Ranch Ponds. Ponds are stocked regularly during the spring and summer. A Colorado fishing license is required as well as a daily or annual vehicle pass. All Colorado Parks and Wildlife regulations apply.
+        </li>
+       </ul>
+
+       <h3>Join</h3>
+         <form action="/action_page.php">
+           <fieldset>
+             <legend>Join us:</legend>
+             FirstName: <input type="text" id="fname" value="please enter name"><br>
+             LastName: <input type="text" id="lname" value="please enter name"><br>
+             Email: <input type="text" id="email"><br>
+             Age:
+             <input type="number" name="Age" value="18"><br>
+             <br>
+             <br>
+
+             Gender: <br>
+             <input type="button" name="male" value="male"><br>
+             <input type="button" name="female" value="female"><br>
+             <br>
+             <br>
+
+             <!--checkbox must be one of the types used-->
+             Like: <br>
+             <input type="checkbox" name="like1" value="here" checked> I like Here<br>
+             <input type="checkbox" name="like2" value="Camping"> I like Backcountry camping<br>
+             <input type="checkbox" name="like3" value="Bike"> I like Biking<br>
+             <input type="checkbox" name="like4" value="Fishing" > I like Fishing<br>
+             <input type="checkbox" name="like5" value="all" > I like All!<br>
+             <br>
+             <br>
+
+             <input type="button" onclick="submit()" value="Submit">
+             <input type="reset" value="Reset">
+            </fieldset>
+
+            <br>
+         </form>
+         <button onclick="submit()">Check</button>
+
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+
+         <footer>
+           <p>Posted by: Cheng Zhang</p>
+           <p>Contact information: <a href="mailto:chengzhang0831!gamil.com">ChengZhang@gamil.com</a>.</p>
+         </footer>
+
+         <!-- References: some source from this website: https://cpw.state.co.us/placestogo/parks/GoldenGateCanyon/Pages/ParkActivities.aspx-->
+
+  </body>
+</html>
