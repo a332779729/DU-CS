@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">This is recipe list,
+        <button [routerLink]="['/home']"
+          type="button" class="btn btn-default">Go to Users(Home Page)
+        </button>
+      </h1>
+      <button type="button" class="btn btn-default" (click)="createRecipe()">Create new Recipe</button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-xs-1 col-lg-1 hidden-xs">Id</th>
+            <th class="col-xs-2 col-lg-2">Name</th>
+            <th class="col-xs-2 col-lg-2">Description</th>
+            <th class="col-xs-1 col-lg-1 hidden-xs">PictureURL</th>
+            <th class="col-xs-1 col-lg-1 hidden-xs">PrepTime</th>
+            <th class="col-xs-2 col-lg-2 hidden-xs">CookingTime</th>
+            <th class="col-xs-1 col-lg-1 hidden-xs">Directions</th>
+            <th class="col-xs-1 col-lg-1 hidden-xs"></th>
+            <th class="col-xs-1 col-lg-1 hidden-xs"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let recipe of recipes">
+            <td class="col-xs-1 col-lg-1 hidden-xs">
+              <button [routerLink]="['/recipe-detail', recipe._id]"
+                  type="button" class="btn btn-default">{{recipe._id}}
+                </button>
+            </td>
+            <td class="col-xs-2 col-lg-2">{{recipe.name}}</td>
+            <td class="col-xs-2 col-lg-2">
+              <button type="button" class="btn btn-primary" popover="{{recipe.description}}">
+                description
+              </button>
+            </td>
+            <td class="col-xs-1 col-lg-1 hidden-xs">{{recipe.pictureURL}}</td>
+            <td class="col-xs-1 col-lg-1 hidden-xs">{{recipe.prepTime}}</td>
+            <td class="col-xs-2 col-lg-2 hidden-xs">{{recipe.cookingTime}}</td>
+            <td class="col-xs-1 col-lg-1 hidden-xs">{{recipe.directions}}</td>
+            <td class="col-xs-1 col-lg-1 hidden-xs">
+              <button (click)="updateRecipe(recipe)" type="button" class="btn btn-default">Edit Recipe
+              </button>
+            </td>
+            <td class="col-xs-1 col-lg-1 hidden-xs">
+              <a (click)="delete(recipe)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

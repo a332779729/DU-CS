@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Users Page</h1>
+    </div>
+    <div>
+      Id: {{ user?._id }}
+    </div>
+    <div>
+      FullName: {{ user?.fullName.firstName }}
+      {{ user?.fullName.lastName }}
+    </div>
+    <div>
+      UserName: {{ user?.userName }}
+    </div>
+    <div>
+      EmailAddress: {{ user?.emailAddress }}
+    </div>
+
+  </div>
+</div>
