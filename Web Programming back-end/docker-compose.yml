@@ -1,0 +1,33 @@
+version: '2'
+volumes:
+  mongodata:
+  nodemodules:
+services:
+  web2-nodejs:
+    build: .
+    image: "web2-nodejs"
+    container_name: "web2-nodejs"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app/web2/:rw
+      - ./data/root:/root/:rw
+      - nodemodules:/app/web2/node_modules/
+    ports:
+      - 8080:8080
+      - 9000:9000
+      - 9001:9001
+    links:
+      - web2-mongodb
+    depends_on:
+      - web2-mongodb
+  web2-mongodb:
+    image: mongo:3
+    container_name: "web2-mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --bind_ip 0.0.0.0 --smallfiles
