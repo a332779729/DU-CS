@@ -1,0 +1,41 @@
+#lang racket
+
+;;1.Write a function, allTrue, which takes a list of boolean values and returns whether the values are all true or not.
+
+;;This function named allTrue, and this function can check the list of boolean if it is all are true. It is return the boolean.
+;;type: boolean
+(define (allTrue alist)
+  (if (empty? alist)
+      #t
+      (if (not (first alist))
+          #f
+          (allTrue (rest alist)))))
+
+
+
+;;2.Write a function, countIncreases, which takes a list of numbers and returns how many times the consecutive numbers increase in value.
+;;For example, countIncreases '(1 3 2 4 5 1) should return 3 because there are three increases: 1 3, 2 4, 4 5.
+
+;;This function named countIncreases, and this function can check how many first element is smaller than followly element. It is return the number.
+;;type: number
+(define num 0)
+
+(define (countIncreases alist)
+  (if (or (empty? alist) (empty? (rest alist)))
+      0
+      (if (< (first alist) (first (rest alist)))
+          (+ (countIncreases (rest alist)) 1)
+          (countIncreases (rest alist)))
+  ))
+
+
+
+;;3.Write a function, downSeries that takes three arguments, step, high, low all assumed to be numbers. Further, step is positive.
+;;downSeries produces a list of numbers from high to low (including high and possibly low) separated by step and in sorted descending order.
+
+;;This function named downSeries, and this function can let list high number change to smaller number that is larger than low number. It is return the list.
+;;type: list
+(define (downSeries step high low)
+  (if (< high low)
+      '()
+      (append (list high) (downSeries step (- high step) low))))

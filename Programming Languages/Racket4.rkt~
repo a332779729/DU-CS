@@ -1,0 +1,24 @@
+#lang racket
+
+
+(require parser-tools/lex
+         (prefix-in : parser-tools/lex-sre))
+
+(provide (all-defined-out))
+
+(define-empty-tokens bool-values (TRUE FALSE))
+
+(define-empty-tokens parens (LEFTPAREN RIGHTPAREN))
+
+(define-empty-tokens bool-operators (AND OR NOT))
+
+;(define mylexer
+  ;(lexer
+  ; [#\(   (token-LEFTPAREN)]
+
+(define (lex in)
+  (let ([tokenizer (get-tokenizer in)])
+    (cond
+      [(eq? tok (token-EOF)) null]
+      [else (cons tok (lex-functino))])))
+   

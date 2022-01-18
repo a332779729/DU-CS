@@ -1,0 +1,12 @@
+#lang racket
+(struct person (name age) #:transparent)
+
+(struct linkednode (value next) #:transparent)
+
+(define (allTrue alist)
+  (if (empty? alist)
+      #t
+      (if (not first(alist))
+          #f
+          (boolean? rest(alist)))))
+  

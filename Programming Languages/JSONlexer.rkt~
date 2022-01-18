@@ -1,0 +1,114 @@
+#lang racket
+
+(require test-engine/racket-tests)
+
+(require parser-tools/lex
+         (prefix-in : parser-tools/lex-sre))
+(provide (all-defined-out))
+
+;;an "object", which is surrounded by braces and is a list of field/value pairs, separated by commas with a colon between the field and value.
+;;The field name is always a string literal, while the value can be any legal JSON value.
+;;an array of JSON values, surrounded by brackets and with the values separated by commas
+(define-empty-tokens parens (LEFTPAREN RIGHTPAREN
+                                       LEFTBRACE RIGHTBRACE
+                                       LEFTBRACKET RIGHTBRACKET))
+;;true false null
+(define-empty-tokens bool-values (TRUE FALSE))
+
+(define-empty-tokens null-values (NULL))
+
+(define-tokens string (STRING))
+
+;;a number, represented as a floating point value
+(define-tokens number (NUMBER))
+
+(define-empty-tokens bool-operators (AND OR NOT))
+
+(define-empty-tokens lambda-def (LAMBDA DOT))
+(define-empty-tokens end-of-file (EOF))
+
+(define-empty-tokens comma (COMMA))
+(define-empty-tokens colon (COLON))
+
+
+
+(define mylexer
+  (lexer
+      ;;an "object", which is surrounded by braces and is a list of field/value pairs, separated by commas with a colon between the field and value.
+      ;;The field name is always a string literal, while the value can be any legal JSON value.
+      [#\}                        (token-RIGHTBRACKET)]
+      [#\{                        (token-LEFTBRACKET)]
+      [#\]                        (token-RIGHTBRACE)]
+      [#\[                        (token-LEFTBRACE)]
+      [#\(                        (token-LEFTPAREN)]
+      [#\)                        (token-RIGHTPAREN)]
+      [#\.                        (token-DOT)]
+      [#\,                        (token-COMMA)]
+      [#\:                        (token-COLON)]
+      [(:or #\λ "lambda")         (token-LAMBDA)]
+      ;;true
+      ["true"                     (token-TRUE)]
+      ;;false
+      ["false"                     (token-FALSE)]
+      ;;null
+      ["null"                     (token-NULL)]
+      ;;a string, surrounded by double quotes and allowing some escaped characters
+      ;[(:: #\" (:+ (complement (:: (:* any-string) #\" (:* any-string)))) #\" ) (token-STRING lexeme)]
+      [(:: #\" (:* (:or (:- any-char #\\ #\") "\\\"" "\\\\" "\\/" "\\b" "\\f" "\\n" "\\r" "\\t" (:: "\\u" (:= 4 (:or numeric #\A #\B #\C #\D #\E #\F))))) #\") (token-STRING lexeme)]
+
+      ;;a number, represented as a floating point value
+      [(:: (:? #\-) (:or #\0 (:: (:or #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9) (:* numeric)))
+           (:? (:: #\. (:* numeric)))
+           (:? (:: (:or #\E #\e) (:? (:or #\+ #\-)) (:* numeric))))               (token-NUMBER lexeme)]
+
+      ;[(:+ numeric) (token-NUMBER lexeme)]
+      ;[(:* numeric) (token-NUMBER lexeme)]
+      ;[(:: #\0 numeric) (token-NUMBER lexeme)]
+      ;[(:: #\+ numeric) (token-NUMBER lexeme)]
+      ;[(:: #\- numeric) (token-NUMBER lexeme)]
+      ;[(:: #\. numeric) (token-NUMBER lexeme)]
+      ;[(:: #\E numeric) (token-NUMBER lexeme)]
+      ;[(:: #\e numeric) (token-NUMBER lexeme)]
+      [whitespace  (mylexer input-port)]
+      [(eof)       (token-EOF)]
+      ))
+
+
+
+
+(define (get-tokenizer in)
+  (lambda () (mylexer in)))
+(define (lex in)
+  (let ([tokenizer (get-tokenizer in)])
+    (define (lex-function)
+              (let ([tok (tokenizer)])
+                   (cond
+                      [(eq? tok (token-EOF)) "null"]
+                      [else (cons tok (lex-function))])))
+    (lex-function)))
+(define (lexstr str)
+  (lex (open-input-string str)))
+(define example (open-input-string "(not true)"))
+
+;;Write Racket programs that read from files.
+
+;;this function named firstAnswer, and this function can read the file. It is return the file.
+;;type: lexfile
+(define (lexfile filename)
+  (let [(in (open-input-file filename))]
+    (lex in)))
+
+(check-expect (mylexer(open-input-string "null")) (token-NULL))
+(check-expect (mylexer(open-input-string "true")) (token-TRUE))
+(check-expect (mylexer(open-input-string "false")) (token-FALSE))
+(check-expect (mylexer(open-input-string "123456")) (token-NUMBER "123456"))
+(check-expect (mylexer(open-input-string "1.23456")) (token-NUMBER "1.23456"))
+(check-expect (mylexer(open-input-string "-1")) (token-NUMBER "-1"))
+(check-expect (mylexer(open-input-string "1e1")) (token-NUMBER "1e1"))
+(check-expect (mylexer(open-input-string "1E1")) (token-NUMBER "1E1"))
+(check-expect (mylexer(open-input-string "1e-1")) (token-NUMBER "1e-1"))
+(check-expect (mylexer(open-input-string "1E-1")) (token-NUMBER "1E-1"))
+(check-expect (mylexer(open-input-string "1.2362E1326")) (token-NUMBER "1.2362E1326"))
+(check-expect (mylexer(open-input-string "\"abc123cba\"")) (token-STRING "\"abc123cba\""))
+
+(test)

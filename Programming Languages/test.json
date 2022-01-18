@@ -1,0 +1,19 @@
+{
+  "String" : "test",
+  "Object1" : 
+  {
+    "Array1" : ["test", "test2", "test3"],
+    "Array2" : [1, 2, 3, 4, 5]
+  },
+  "Object2" : 
+  {
+    "num1" : 1,
+    "num2" : 1.1,
+    "num3" : -1,
+    "num4" : 1e1,
+    "num5" : 1E1,
+    "num6" : 1e-1,
+    "num7" : 1000324,
+    "num8" : 1.342342,
+    "num9" : 1.2342E1324}
+}

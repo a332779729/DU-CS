@@ -1,0 +1,52 @@
+#lang racket
+
+(define (allTrue alist)
+  (if (empty? alist)
+      #t
+      (if (not (first alist))
+          #f
+          (allTrue (rest alist)))))
+
+(define (squareSum num)
+  (if (< num 0)
+      0
+      (+ (* num num) (squareSum (- num 1)))))
+
+(define squareSum2 (λ (x) (* x x)))
+
+
+(define (cycleOne alist)
+  (if (empty? alist)
+      '()
+      (append (rest alist) (first alist))))
+
+;(define (cycleN num alist)
+;  (if (empty? alist)
+ ;     '()
+  ;    (if (= num 0)
+   ;       alist
+    ;      (cycleN (- num 1) (append (rest alist) (first alist))))));;???
+
+(define (memberOf? value alist)
+  (if (empty? alist)
+     #f
+     (if (equal? value (first alist))
+         #t
+         (memberOf? value (rest alist)))))
+
+
+(define (intersectio alist blist)
+  (cond [(empty? alist) #f]
+        [(empty? blist) #f]
+        [(memberOf? (first alist) blist) #t]
+        [else (intersectio (rest alist) blist)]))
+      
+      
+  
+      
+      
+
+
+
+
+     

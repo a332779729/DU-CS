@@ -1,0 +1,21 @@
+#lang racket
+(define (myIf a b c )
+  (if a (b) (c)))
+
+(define (myDelay func)
+  (mcons #f func))
+
+(define (myForce thunk)
+  (cond
+    [(mcar thunk) (mcdr thunk)]
+    [else
+      (set-mcar! thunk #t)
+      (set-mcdr! thunk ((mcdr thunk)))
+      (mcdr thunk)]))
+
+(define (onetwo)
+  (+ 1 2))
+
+(define onetwoThunk (myDelay onetwo))
+
+;;;Stream Examples
