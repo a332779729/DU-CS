@@ -1,0 +1,37 @@
+#lang racket
+
+(require "LambdaAbstractSyntaxTree.rkt"
+         "LambdaParser.rkt")
+
+(define (empty-env)
+  (lambda (searchVar)
+    (error "No Binding Found" searchVar)))
+
+(define (extend-env savedVar savedVal savedEnv)
+  (lambda (searchVar)
+    (if (equal? searchVar savedVar)
+        savedVal
+        (apply-env savedEnv searchVar))))
+
+(define (apply-env env searchVar)
+  (env searchVar))
+
+;(struct identifier (name) #:transparent)
+;(struct def (name expr) #:transparent)
+;(struct app (expr1 expr2) #:transparent)
+
+(define (eval expression)
+  (evalHelper expression (empty-env)))
+
+(define (evalHelper expression env)
+  (match expression
+    [(identifier name) (apply-env env name) ]
+    [(def name expr)   (def name expr)]
+    ;;; Apply function expr1 to the argument expr2
+    [(app expr1 expr2) (evalHelper
+                            (def-expr expr1)   ;;; This is the Function Body
+                            (extend-env (def-name expr1) ;;; This is the new Env
+                                        (evalHelper expr2 env)
+                                        env))]
+                    
+    ))
